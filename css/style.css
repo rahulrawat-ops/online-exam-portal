@@ -1,0 +1,915 @@
+/* ===================================================
+   Online Examination Portal - Stylesheet
+   Classic Academic / College Portal Theme
+   =================================================== */
+
+:root {
+  --primary-color: #1a4f8b;        /* Classic University Navy */
+  --primary-hover: #133a66;
+  --secondary-color: #2c7da0;
+  --bg-color: #f4f6f9;             /* Soft institutional light gray */
+  --card-bg: #ffffff;
+  --text-main: #333333;
+  --text-muted: #666666;
+  --border-color: #d1d5db;
+  --header-bg: #0d2b45;
+  --header-text: #ffffff;
+
+  /* Exam Palette Status Colors */
+  --status-answered: #28a745;      /* Green */
+  --status-not-answered: #dc3545;  /* Red */
+  --status-marked: #ffc107;        /* Yellow */
+  --status-not-visited: #6c757d;   /* Gray */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- Top Portal Header ---------------- */
+.portal-header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  padding: 12px 20px;
+  border-bottom: 3px solid #ff9f1c;
+}
+
+.portal-header .header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  background-color: #ff9f1c;
+  color: #0d2b45;
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.logo-text h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.logo-text p {
+  font-size: 0.8rem;
+  color: #d0d7de;
+}
+
+.user-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 0.9rem;
+}
+
+.user-nav .badge {
+  background: #1e3a5f;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 1px solid #3d608d;
+}
+
+/* ---------------- Navigation Bar ---------------- */
+.portal-navbar {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-bottom: 1px solid #0f3562;
+}
+
+.portal-navbar .nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-links li a {
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 16px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-links li:first-child a {
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  background-color: var(--primary-hover);
+}
+
+/* ---------------- Main Content Layout ---------------- */
+.main-wrapper {
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0 15px;
+  flex: 1;
+}
+
+/* ---------------- Common Cards & Boxes ---------------- */
+.portal-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.portal-card-header {
+  background-color: #eaeff5;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 600;
+  color: #1a365d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.portal-card-body {
+  padding: 18px;
+}
+
+/* ---------------- Buttons ---------------- */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.15s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-color: #154173;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #ffffff;
+}
+.btn-secondary:hover {
+  background-color: #565e64;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: #ffffff;
+}
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+/* ---------------- Form Controls ---------------- */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  background-color: #fff;
+  transition: border-color 0.15s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(26, 79, 139, 0.2);
+}
+
+/* ---------------- Notice Ticker ---------------- */
+.notice-bar {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 8px 15px;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.notice-bar strong {
+  background: #ffc107;
+  color: #000;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  border-radius: 2px;
+}
+
+/* ===================================================
+   Page 1: Login Page Specifics
+   =================================================== */
+.login-container {
+  display: flex;
+  gap: 25px;
+  align-items: flex-start;
+  max-width: 960px;
+  margin: 30px auto;
+}
+
+.login-box {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
+  padding: 25px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.login-box h2 {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 10px;
+}
+
+.instructions-box {
+  flex: 1.2;
+  background: #fdfdfd;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.instructions-box h3 {
+  font-size: 1.1rem;
+  color: #0d2b45;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #eaeff5;
+  padding-bottom: 8px;
+}
+
+.instructions-list {
+  padding-left: 20px;
+  font-size: 0.88rem;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.demo-credentials {
+  margin-top: 15px;
+  background-color: #e8f4fd;
+  border: 1px dashed #2c7da0;
+  padding: 10px 12px;
+  font-size: 0.83rem;
+  border-radius: 3px;
+}
+
+/* ===================================================
+   Page 2: Dashboard Specifics
+   =================================================== */
+.student-banner {
+  background: linear-gradient(to right, #1a4f8b, #2b6cb0);
+  color: #ffffff;
+  padding: 18px 22px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.student-meta h2 {
+  font-size: 1.25rem;
+}
+
+.student-meta p {
+  font-size: 0.88rem;
+  color: #e2e8f0;
+}
+
+.table-custom {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.88rem;
+}
+
+.table-custom th,
+.table-custom td {
+  border: 1px solid #dee2e6;
+  padding: 9px 12px;
+  text-align: left;
+}
+
+.table-custom th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: #334155;
+}
+
+.table-custom tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.badge-active {
+  background-color: #d4edda;
+  color: #155724;
+}
+.badge-passed {
+  background-color: #cce5ff;
+  color: #004085;
+}
+.badge-scheduled {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* ===================================================
+   Page 3: Live Exam Interface Specifics
+   =================================================== */
+.exam-header-bar {
+  background-color: #1a4f8b;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.timer-box {
+  background-color: #0d2b45;
+  border: 1px solid #ff9f1c;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #ffcf70;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer-box.timer-warning {
+  background-color: #dc3545;
+  color: #fff;
+  border-color: #fff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.7; }
+}
+
+.exam-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  margin-top: 15px;
+}
+
+.question-area {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+}
+
+.question-header {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.question-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.options-list {
+  list-style: none;
+  margin-bottom: 25px;
+}
+
+.option-item {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.15s;
+}
+
+.option-item:hover {
+  background-color: #f3f6fa;
+}
+
+.option-item input[type="radio"] {
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
+.option-item.selected {
+  background-color: #e7f1ff;
+  border-color: #90b8f8;
+}
+
+.question-actions {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Palette Sidebar */
+.palette-sidebar {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.palette-sidebar h4 {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 6px;
+  color: #1e3a5f;
+}
+
+.palette-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 0.75rem;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #d1d5db;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+.btn-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.btn-palette {
+  height: 38px;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-palette.not-visited {
+  background-color: var(--status-not-visited);
+}
+
+.btn-palette.not-answered {
+  background-color: var(--status-not-answered);
+}
+
+.btn-palette.answered {
+  background-color: var(--status-answered);
+}
+
+.btn-palette.marked {
+  background-color: var(--status-marked);
+  color: #212529;
+}
+
+.btn-palette.current {
+  outline: 2px solid #000;
+  outline-offset: 1px;
+}
+
+/* ===================================================
+   Page 4: Results & Scorecard Specifics
+   =================================================== */
+.score-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.score-stat-card {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  padding: 15px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.score-stat-card .stat-number {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1a4f8b;
+  margin-top: 5px;
+}
+
+.score-stat-card.passed {
+  border-left: 4px solid #28a745;
+}
+.score-stat-card.failed {
+  border-left: 4px solid #dc3545;
+}
+
+.review-item {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 14px;
+  margin-bottom: 14px;
+  background: #fff;
+}
+
+.review-item.is-correct {
+  border-left: 4px solid #28a745;
+}
+
+.review-item.is-wrong {
+  border-left: 4px solid #dc3545;
+}
+
+.review-item.is-unattempted {
+  border-left: 4px solid #6c757d;
+}
+
+.review-meta {
+  font-size: 0.82rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.review-options {
+  font-size: 0.88rem;
+  margin: 10px 0 10px 15px;
+  line-height: 1.6;
+}
+
+.review-explanation {
+  background: #f1f5f9;
+  padding: 8px 12px;
+  font-size: 0.83rem;
+  color: #475569;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+
+/* ---------------- Modal Dialogs ---------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-dialog {
+  background: #fff;
+  border-radius: 4px;
+  max-width: 480px;
+  width: 90%;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-dialog h3 {
+  margin-bottom: 10px;
+  color: #1a365d;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* ---------------- Footer ---------------- */
+.portal-footer {
+  background-color: #0d2b45;
+  color: #adb5bd;
+  text-align: center;
+  padding: 14px 15px;
+  font-size: 0.8rem;
+  border-top: 2px solid #ff9f1c;
+  margin-top: auto;
+}
+
+/* ---------------- Responsive Styles ---------------- */
+@media (max-width: 860px) {
+  .exam-grid-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .login-container {
+    flex-direction: column;
+  }
+
+  .portal-header .header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-nav {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav-links li a {
+    padding: 8px 10px;
+    font-size: 0.82rem;
+  }
+
+  .question-actions {
+    flex-direction: column;
+  }
+
+  .question-actions .btn {
+    width: 100%;
+  }
+
+  .btn-palette-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ---------------- Print Stylesheet ---------------- */
+@media print {
+  .portal-navbar,
+  .portal-footer,
+  .btn,
+  .notice-bar {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .main-wrapper {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .portal-card {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+
+
+/* ===================================================
+   Admin & Role Login Extension Styles
+   =================================================== */
+
+.login-role-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.login-role-tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 14px;
+  background-color: #f1f5f9;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #475569;
+  cursor: pointer;
+  border: 1px solid #dee2e6;
+  border-bottom: none;
+  transition: all 0.2s ease;
+}
+
+.login-role-tab:first-child {
+  border-radius: 4px 0 0 0;
+}
+
+.login-role-tab:last-child {
+  border-radius: 0 4px 0 0;
+  border-left: none;
+}
+
+.login-role-tab.active {
+  background-color: #ffffff;
+  color: var(--primary-color);
+  border-top: 3px solid var(--primary-color);
+  border-bottom: 2px solid #ffffff;
+  margin-bottom: -2px;
+}
+
+.admin-banner {
+  background: linear-gradient(to right, #822727, #991b1b);
+  color: #ffffff;
+  padding: 18px 22px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.admin-action-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.q-manage-card {
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  transition: box-shadow 0.15s ease;
+}
+
+.q-manage-card:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.q-manage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.q-manage-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 14px;
+  margin: 10px 0;
+  font-size: 0.86rem;
+}
+
+.q-opt-pill {
+  padding: 4px 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 3px;
+  background-color: #f8fafc;
+}
+
+.q-opt-pill.correct {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+  font-weight: 600;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .q-manage-options {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Assessment in Progress - Web Technologies & Systems</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: #eef2f6;">
+
+  <!-- Exam Live Header -->
+  <header class="exam-header-bar">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <div style="background: #ff9f1c; color:#000; font-weight: bold; padding: 4px 10px; border-radius: 3px; font-size: 0.85rem;">
+        LIVE TEST
+      </div>
+      <div>
+        <h2 id="examPaperTitle" style="font-size: 1.15rem; margin: 0;">CS401: Web Technologies & Systems</h2>
+        <span style="font-size: 0.8rem; color: #d0e1fd;">Candidate: <strong class="display-student-name">Rahul Sharma</strong> (Roll: <strong class="display-student-roll">CS2024089</strong>)</span>
+      </div>
+    </div>
+
+    <!-- Live Timer -->
+    <div class="timer-box" id="timerBox">
+      <span>&#9201; Time Left:</span>
+      <span id="timerDisplay">15:00</span>
+    </div>
+  </header>
+
+  <!-- Main Exam Content -->
+  <main class="main-wrapper" style="margin-top: 15px;">
+    
+    <div class="exam-grid-layout">
+
+      <!-- Left Column: Active Question Area -->
+      <section class="question-area">
+        
+        <div class="question-header">
+          <div>
+            <span id="currentQuestionNum" style="font-weight: bold; color: #1a4f8b; font-size: 1.1rem;">Question 1 of 10</span>
+          </div>
+          <div style="font-size: 0.85rem; color: #555;">
+            <span>Marks: <strong>+1.0</strong></span> | <span>Negative: <strong>0.0</strong></span>
+          </div>
+        </div>
+
+        <!-- Question Text -->
+        <div class="question-text" id="questionText">
+          Loading question text...
+        </div>
+
+        <!-- Options Container -->
+        <ul class="options-list" id="optionsList">
+          <!-- Dynamically populated options -->
+        </ul>
+
+        <!-- Bottom Action Buttons -->
+        <div class="question-actions">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btnPrev" onclick="prevQuestion()">&larr; Previous</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnNext" onclick="nextQuestion()">Next &rarr;</button>
+            <button type="button" class="btn btn-warning btn-sm" onclick="clearCurrentResponse()">Clear Selection</button>
+          </div>
+
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-warning btn-sm" onclick="markForReview()">&#128278; Mark for Review</button>
+            <button type="button" class="btn btn-primary" onclick="saveAndNext()">Save &amp; Next &rarr;</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Question Palette Sidebar -->
+      <aside class="palette-sidebar">
+        <h4>Question Navigation Palette</h4>
+
+        <!-- Legend -->
+        <div class="palette-legend">
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: var(--status-answered);"></div>
+            <span>Answered (<span id="countAnswered">0</span>)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: var(--status-not-answered);"></div>
+            <span>Not Answered (<span id="countNotAnswered">0</span>)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: var(--status-marked);"></div>
+            <span>Marked (<span id="countMarked">0</span>)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color" style="background-color: var(--status-not-visited);"></div>
+            <span>Not Visited (<span id="countNotVisited">10</span>)</span>
+          </div>
+        </div>
+
+        <!-- Numbered Grid Buttons -->
+        <div class="btn-palette-grid" id="paletteButtons">
+          <!-- Dynamically generated palette buttons 1 to 10 -->
+        </div>
+
+        <!-- Submission Trigger -->
+        <div style="margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 15px; text-align: center;">
+          <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">Review your answers carefully before submitting.</p>
+          <button type="button" class="btn btn-danger" style="width: 100%; font-weight: bold; padding: 10px;" onclick="openSubmitModal()">
+            Submit Examination
+          </button>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- Submit Confirmation Modal -->
+  <div class="modal-overlay" id="submitModal">
+    <div class="modal-dialog">
+      <h3 style="border-bottom: 1px solid #dee2e6; padding-bottom: 8px;">Final Exam Submission</h3>
+      <p style="font-size: 0.9rem; margin-top: 10px;">
+        Are you sure you want to finish and submit your examination? Once submitted, you cannot change your answers.
+      </p>
+
+      <div id="modalSummaryText" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px; margin: 15px 0; font-size: 0.88rem; line-height: 1.8;">
+        <!-- Injected via JS -->
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeSubmitModal()">Return to Exam</button>
+        <button type="button" class="btn btn-success" onclick="finalizeSubmission()">Confirm &amp; Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/exam.js"></script>
+</body>
+</html>
+

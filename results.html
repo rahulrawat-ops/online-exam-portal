@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examination Result & Performance Analysis</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="portal-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon">&#128221;</div>
+        <div class="logo-text">
+          <h1>NATIONAL INSTITUTE EXAMINATION PORTAL</h1>
+          <p>Official Electronic Scorecard & Assessment Evaluation</p>
+        </div>
+      </div>
+      <div class="user-nav">
+        <span class="badge">Candidate: <strong class="display-student-name" id="resStudentName">Rahul Sharma</strong></span>
+        <span class="badge">Roll: <strong class="display-student-roll" id="resRollNo">CS2024089</strong></span>
+        <button onclick="handleLogout()" class="btn btn-danger btn-sm">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="portal-navbar">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="dashboard.html">&larr; Return to Dashboard</a></li>
+        <li><a href="results.html" class="active">Scorecard & Answer Key</a></li>
+        <li><a href="admin.html">&#9881; Admin Panel</a></li>
+      </ul>
+      <button onclick="window.print()" class="btn btn-warning btn-sm" style="margin: 6px 0;">&#128438; Print / Save PDF</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+
+    <!-- Scorecard Header Card -->
+    <section class="portal-card">
+      <div class="portal-card-header">
+        <span>Candidate Examination Summary Report</span>
+        <span id="resStatusBadge" class="status-badge badge-active">EVALUATED</span>
+      </div>
+      <div class="portal-card-body">
+        
+        <table class="table-custom" style="margin-bottom: 20px;">
+          <tbody>
+            <tr>
+              <td style="width: 25%; background: #f8fafc;"><strong>Candidate Name:</strong></td>
+              <td style="width: 25%;"><span class="display-student-name">Rahul Sharma</span></td>
+              <td style="width: 25%; background: #f8fafc;"><strong>Roll Number:</strong></td>
+              <td style="width: 25%;"><span class="display-student-roll">CS2024089</span></td>
+            </tr>
+            <tr>
+              <td style="background: #f8fafc;"><strong>Course / Degree:</strong></td>
+              <td><span id="resCourse">B.Tech Computer Science & Engg</span></td>
+              <td style="background: #f8fafc;"><strong>Paper / Code:</strong></td>
+              <td><span id="resExamTitle">CS401: Web Technologies & Systems</span></td>
+            </tr>
+            <tr>
+              <td style="background: #f8fafc;"><strong>Submission Timestamp:</strong></td>
+              <td><span id="resDate">--</span></td>
+              <td style="background: #f8fafc;"><strong>Evaluation Mode:</strong></td>
+              <td>Automated System Grading (100% Verified)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Metric Stat Cards -->
+        <div class="score-summary-grid">
+          
+          <div class="score-stat-card passed">
+            <div style="font-size: 0.85rem; color: #666;">Total Score</div>
+            <div class="stat-number" id="resScore">0 / 10</div>
+          </div>
+
+          <div class="score-stat-card">
+            <div style="font-size: 0.85rem; color: #666;">Percentage</div>
+            <div class="stat-number" id="resPercentage" style="color: #2b6cb0;">0%</div>
+          </div>
+
+          <div class="score-stat-card">
+            <div style="font-size: 0.85rem; color: #666;">Attempted Questions</div>
+            <div class="stat-number" id="resAttempted" style="color: #334155;">0</div>
+          </div>
+
+          <div class="score-stat-card">
+            <div style="font-size: 0.85rem; color: #666;">Correct Answers</div>
+            <div class="stat-number" id="resCorrect" style="color: #28a745;">0</div>
+          </div>
+
+          <div class="score-stat-card">
+            <div style="font-size: 0.85rem; color: #666;">Incorrect Answers</div>
+            <div class="stat-number" id="resWrong" style="color: #dc3545;">0</div>
+          </div>
+
+          <div class="score-stat-card">
+            <div style="font-size: 0.85rem; color: #666;">Unattempted</div>
+            <div class="stat-number" id="resUnattempted" style="color: #6c757d;">0</div>
+          </div>
+
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+          <button onclick="window.print()" class="btn btn-primary btn-sm">&#128438; Print Official Scorecard</button>
+          <a href="dashboard.html" class="btn btn-secondary btn-sm">Return to Student Dashboard</a>
+          <a href="exam.html" class="btn btn-warning btn-sm" onclick="return confirm('Do you want to re-take this exam? Existing answers will be reset.');">Retake Assessment</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Detailed Question Breakdown & Answer Key -->
+    <section class="portal-card">
+      <div class="portal-card-header">
+        <span>Detailed Question-by-Question Review & Answer Key</span>
+        <span style="font-size: 0.8rem; font-weight: normal; color: #4b5563;">Passing Marks: 40%</span>
+      </div>
+      <div class="portal-card-body" id="detailedReviewContainer">
+        <!-- Rendered dynamically by results.js -->
+        <p style="text-align: center; color: #666;">Loading questions and responses...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="portal-footer">
+    <p>&copy; 2026 Examination Automation Cell. All Rights Reserved.</p>
+    <p style="font-size: 0.75rem; margin-top: 4px; color: #8fa0b3;">System Verified Electronic Result &bull; No physical signature required</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/results.js"></script>
+</body>
+</html>
+

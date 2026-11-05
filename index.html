@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Examination Portal - Candidate & Admin Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="portal-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon">&#128218;</div>
+        <div class="logo-text">
+          <h1>NATIONAL INSTITUTE EXAMINATION PORTAL</h1>
+          <p>Autonomous Online Assessment & Evaluation System (Session 2026-27)</p>
+        </div>
+      </div>
+      <div class="user-nav">
+        <span class="badge">Helpdesk: +91-1800-456-7890</span>
+        <span class="badge">Server Status: Online</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="portal-navbar">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home / Login</a></li>
+        <li><a href="dashboard.html">Student Dashboard</a></li>
+        <li><a href="admin.html">Admin Panel</a></li>
+        <li><a href="#instructions">Exam Instructions</a></li>
+      </ul>
+      <span style="font-size: 0.85rem; color: #ffeb3b; padding: 10px 0;">Time: 12:00 PM IST</span>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+    <!-- Notice Bar -->
+    <div class="notice-bar">
+      <strong>URGENT NOTICE:</strong>
+      <span>Online End-Semester Examinations are now active. Candidates login with Roll Number; Faculty & Administrators login with Admin ID to configure tests.</span>
+    </div>
+
+    <!-- Login Area & Instructions -->
+    <div class="login-container">
+      
+      <!-- Left: Login Box with Tabs -->
+      <section class="login-box">
+        
+        <!-- Role Selection Tabs -->
+        <div class="login-role-tabs">
+          <button type="button" class="login-role-tab active" id="tabStudent" onclick="switchLoginRole('student')">
+            &#127891; Student Login
+          </button>
+          <button type="button" class="login-role-tab" id="tabAdmin" onclick="switchLoginRole('admin')">
+            &#128188; Admin / Controller
+          </button>
+        </div>
+
+        <div id="loginError" style="display:none; color: #dc3545; background: #f8d7da; border: 1px solid #f5c6cb; padding: 8px 10px; font-size: 0.85rem; border-radius: 3px; margin-bottom: 12px;"></div>
+
+        <!-- 1. Student Login Form -->
+        <div id="studentLoginForm">
+          <h2>Candidate Login</h2>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Enter your credentials to enter the exam portal</p>
+
+          <form onsubmit="return handleLogin(event);">
+            <div class="form-group">
+              <label for="studentId">Student Roll Number / Enrollment ID:</label>
+              <input type="text" id="studentId" class="form-control" placeholder="e.g. CS2024089" value="CS2024089" required>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password / DOB (DDMMYYYY):</label>
+              <input type="password" id="password" class="form-control" placeholder="Enter your password" value="12345" required>
+            </div>
+
+            <div class="form-group">
+              <label for="examBatch">Select Examination:</label>
+              <select id="examBatch" class="form-control">
+                <option value="CS401">CS401 - Web Technologies & Systems (Live)</option>
+                <option value="CS302">CS302 - Database Management Systems (Upcoming)</option>
+                <option value="CS201">CS201 - Data Structures & Algorithms (Upcoming)</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+              <label style="font-weight: normal; margin-bottom: 0;">
+                <input type="checkbox" checked> Remember my Roll No.
+              </label>
+              <a href="#" onclick="alert('Please contact examination controller at exam-cell@univ.edu.in to reset your password.'); return false;" style="color: #1a4f8b; text-decoration: none;">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; font-size: 1rem; margin-top: 5px;">
+              Sign In as Student &rarr;
+            </button>
+          </form>
+
+          <div class="demo-credentials">
+            <strong>Demo Student Credentials:</strong><br>
+            Roll No: <code>CS2024089</code> | Password: <code>12345</code><br>
+            <small>(Pre-filled for your quick testing convenience)</small>
+          </div>
+        </div>
+
+        <!-- 2. Admin / Examiner Login Form (Hidden by default) -->
+        <div id="adminLoginForm" style="display: none;">
+          <h2 style="color: #991b1b;">Examination Controller Login</h2>
+          <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">Admin access to create, edit, delete questions & manage exams</p>
+
+          <form onsubmit="return handleAdminLogin(event);">
+            <div class="form-group">
+              <label for="adminId">Administrator ID / Username:</label>
+              <input type="text" id="adminId" class="form-control" placeholder="e.g. admin" value="admin" required>
+            </div>
+
+            <div class="form-group">
+              <label for="adminPassword">Admin Security Password:</label>
+              <input type="password" id="adminPassword" class="form-control" placeholder="Enter admin password" value="admin123" required>
+            </div>
+
+            <div class="form-group">
+              <label for="adminRoleSelect">Administrative Role:</label>
+              <select id="adminRoleSelect" class="form-control">
+                <option value="controller">Chief Examination Controller</option>
+                <option value="faculty">Course Instructor / Question Setter</option>
+                <option value="evaluator">Chief Academic Evaluator</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
+              <label style="font-weight: normal; margin-bottom: 0;">
+                <input type="checkbox" checked> Keep Admin Session Active
+              </label>
+              <span style="color: #666; font-size: 0.8rem;">Authorized Access Only</span>
+            </div>
+
+            <button type="submit" class="btn btn-danger" style="width: 100%; padding: 10px; font-size: 1rem; margin-top: 5px; background-color: #991b1b; border-color: #7f1d1d;">
+              Sign In to Admin Panel &rarr;
+            </button>
+          </form>
+
+          <div class="demo-credentials" style="background-color: #fef2f2; border-color: #f87171;">
+            <strong>Demo Admin Credentials:</strong><br>
+            Username: <code>admin</code> | Password: <code>admin123</code><br>
+            <small>(Click the button above to manage exam questions & settings)</small>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right: Instructions Box -->
+      <section class="instructions-box" id="instructions">
+        <h3>Portal Guidelines & Capabilities</h3>
+        <ol class="instructions-list">
+          <li><strong>Students:</strong> Log in with Roll Number to take scheduled examinations with a live timer and question palette.</li>
+          <li><strong>Administrators / Instructors:</strong> Log in with Admin ID to:
+            <ul style="margin: 5px 0 5px 20px; font-size: 0.85rem; color: #333;">
+              <li>Create new questions (MCQs with 4 options, answer key, explanation).</li>
+              <li>Edit or update existing exam questions in real-time.</li>
+              <li>Delete outdated questions from the question bank.</li>
+              <li>Modify exam duration (timer limit) and paper title.</li>
+              <li>View recorded student test submissions and scores.</li>
+            </ul>
+          </li>
+          <li>Each question carries <strong>1 Mark</strong>. Results are calculated instantly on submission.</li>
+          <li>All custom questions and edits are automatically saved and immediately presented to students taking the exam.</li>
+        </ol>
+
+        <div style="margin-top: 20px; padding: 12px; background: #fff8e1; border: 1px solid #ffe082; border-radius: 4px; font-size: 0.84rem;">
+          <strong>Technical Support:</strong><br>
+          If you encounter any screen freezing or browser malfunction, contact the university helpdesk at <strong>ext 204</strong> or email <strong>support@examportal.edu</strong>.
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="portal-footer" id="contact">
+    <p>&copy; 2026 Examination Automation Cell. All Rights Reserved.</p>
+    <p style="font-size: 0.75rem; margin-top: 4px; color: #8fa0b3;">Designed for Academic Evaluation &bull; Supports Candidate & Admin Management</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

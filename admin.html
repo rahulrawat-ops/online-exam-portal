@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Examination Controller & Question Setter</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="portal-header" style="border-bottom-color: #ef4444;">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon" style="background-color: #ef4444; color: #fff;">&#9881;</div>
+        <div class="logo-text">
+          <h1>NATIONAL INSTITUTE EXAMINATION PORTAL</h1>
+          <p>Administrator &amp; Question Setter Control Panel &bull; Academic Session 2026</p>
+        </div>
+      </div>
+      <div class="user-nav">
+        <span class="badge" style="background: #3b1818; border-color: #7f1d1d;">
+          Admin: <strong class="display-admin-name">Dr. S. K. Verma</strong>
+        </span>
+        <span class="badge" style="background: #3b1818; border-color: #7f1d1d;">
+          Role: <strong class="display-admin-role">Examination Controller</strong>
+        </span>
+        <button onclick="handleAdminLogout()" class="btn btn-danger btn-sm">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="portal-navbar" style="background-color: #7f1d1d;">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="admin.html" class="active">Question Bank</a></li>
+        <li><a href="#questionEditorCard">Add / Edit Question</a></li>
+        <li><a href="#examConfigSection">Exam Timing &amp; Config</a></li>
+        <li><a href="#submissionsSection">Student Submissions</a></li>
+        <li><a href="dashboard.html">Switch to Student View</a></li>
+      </ul>
+      <a href="exam.html" class="btn btn-warning btn-sm" style="margin: 6px 0;" target="_blank">
+        &#9654; Test Live Exam &rarr;
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="main-wrapper">
+
+    <!-- Alert Notification Box -->
+    <div id="adminAlertBox" style="display: none;" class="notice-bar"></div>
+
+    <!-- Admin Welcome Banner -->
+    <section class="admin-banner">
+      <div>
+        <h2 style="font-size: 1.25rem;">Examination Management &amp; Question Setter Portal</h2>
+        <p style="font-size: 0.88rem; color: #fecaca;">
+          Set new multiple-choice questions, edit existing questions, configure time limits, and review student score logs.
+        </p>
+      </div>
+      <div>
+        <button type="button" onclick="resetToDefaultQuestions()" class="btn btn-warning btn-sm" style="font-weight: 600;">
+          &#8635; Reset to Default Questions
+        </button>
+      </div>
+    </section>
+
+    <!-- Metrics Cards -->
+    <div class="score-summary-grid">
+      <div class="score-stat-card">
+        <div style="font-size: 0.85rem; color: #666;">Total Questions in Exam</div>
+        <div class="stat-number" id="adminQuestionCount" style="color: #991b1b;">10</div>
+      </div>
+      <div class="score-stat-card">
+        <div style="font-size: 0.85rem; color: #666;">Marks Per Question</div>
+        <div class="stat-number" style="color: #1a4f8b;">1.0</div>
+      </div>
+      <div class="score-stat-card">
+        <div style="font-size: 0.85rem; color: #666;">Negative Marking</div>
+        <div class="stat-number" style="color: #28a745;">None (0.0)</div>
+      </div>
+      <div class="score-stat-card">
+        <div style="font-size: 0.85rem; color: #666;">Student Submissions Recorded</div>
+        <div class="stat-number" id="adminSubmissionsCount" style="color: #475569;">0</div>
+      </div>
+    </div>
+
+    <!-- Section 1: Add or Edit Question Form -->
+    <section class="portal-card" id="questionEditorCard" style="border-top: 3px solid #991b1b;">
+      <div class="portal-card-header">
+        <span id="formCardHeader">Add New Question to Exam</span>
+        <span style="font-size: 0.8rem; color: #666;">Changes update live exam for all students immediately</span>
+      </div>
+      <div class="portal-card-body">
+        <form id="questionForm" onsubmit="return handleSaveQuestion(event);">
+
+          <div class="form-group">
+            <label for="qInputText">Question Text / Problem Statement:</label>
+            <textarea id="qInputText" class="form-control" rows="2" placeholder="e.g. Which HTML tag is used to create an internal stylesheet?" required></textarea>
+          </div>
+
+          <div class="admin-form-grid">
+            <div class="form-group">
+              <label for="qInputOptA">Option A:</label>
+              <input type="text" id="qInputOptA" class="form-control" placeholder="e.g. <script>" required>
+            </div>
+            <div class="form-group">
+              <label for="qInputOptB">Option B:</label>
+              <input type="text" id="qInputOptB" class="form-control" placeholder="e.g. <style>" required>
+            </div>
+            <div class="form-group">
+              <label for="qInputOptC">Option C:</label>
+              <input type="text" id="qInputOptC" class="form-control" placeholder="e.g. <css>" required>
+            </div>
+            <div class="form-group">
+              <label for="qInputOptD">Option D:</label>
+              <input type="text" id="qInputOptD" class="form-control" placeholder="e.g. <link>" required>
+            </div>
+          </div>
+
+          <div class="admin-form-grid">
+            <div class="form-group">
+              <label for="qInputCorrect">Correct Answer Key:</label>
+              <select id="qInputCorrect" class="form-control">
+                <option value="0">Option A is Correct</option>
+                <option value="1">Option B is Correct</option>
+                <option value="2">Option C is Correct</option>
+                <option value="3">Option D is Correct</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="qInputExplanation">Solution / Explanation (Visible to student on scorecard):</label>
+              <input type="text" id="qInputExplanation" class="form-control" placeholder="e.g. The <style> tag defines style info for a document.">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <button type="submit" id="formSubmitBtn" class="btn btn-primary">
+              + Add Question to Exam
+            </button>
+            <button type="button" id="formCancelBtn" class="btn btn-secondary" onclick="cancelEditQuestion()" style="display: none;">
+              Cancel Editing
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- Section 2: Active Question Bank List -->
+    <section class="portal-card">
+      <div class="portal-card-header">
+        <span>Active Question Bank (Live in Examination)</span>
+        <button type="button" onclick="loadQuestionBankUI()" class="btn btn-secondary btn-sm">&#8635; Refresh List</button>
+      </div>
+      <div class="portal-card-body">
+        <div id="adminQuestionsContainer">
+          <!-- Dynamically populated question cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Exam Configuration & Time Limit -->
+    <section class="portal-card" id="examConfigSection">
+      <div class="portal-card-header">
+        <span>Exam Timing &amp; Configuration Settings</span>
+      </div>
+      <div class="portal-card-body">
+        <form onsubmit="return handleSaveSettings(event);">
+          <div class="admin-form-grid">
+            <div class="form-group">
+              <label for="settingExamTitle">Examination Paper Title &amp; Code:</label>
+              <input type="text" id="settingExamTitle" class="form-control" value="CS401: Web Technologies & Systems" required>
+            </div>
+            <div class="form-group">
+              <label for="settingExamDuration">Exam Time Limit (Minutes):</label>
+              <input type="number" id="settingExamDuration" class="form-control" min="1" max="180" value="15" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success btn-sm">Save Exam Settings</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Section 4: Student Exam Submissions Log -->
+    <section class="portal-card" id="submissionsSection">
+      <div class="portal-card-header">
+        <span>Student Submissions &amp; Evaluation Log</span>
+        <button type="button" class="btn btn-danger btn-sm" onclick="clearSubmissionsLog()">Clear History</button>
+      </div>
+      <div class="portal-card-body">
+        <div style="overflow-x: auto;">
+          <table class="table-custom">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th>Candidate Name</th>
+                <th>Roll Number</th>
+                <th>Score (Marks / %)</th>
+                <th>Result Status</th>
+                <th>Submission Time</th>
+              </tr>
+            </thead>
+            <tbody id="submissionsTableBody">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="portal-footer">
+    <p>&copy; 2026 Examination Automation Cell. Administrator Control Panel.</p>
+    <p style="font-size: 0.75rem; margin-top: 4px; color: #8fa0b3;">Authorized Academic Administration Only &bull; Changes apply immediately to client sessions</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
+

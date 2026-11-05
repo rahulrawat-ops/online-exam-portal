@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Examination Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="portal-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-icon">&#127891;</div>
+        <div class="logo-text">
+          <h1>NATIONAL INSTITUTE EXAMINATION PORTAL</h1>
+          <p>Candidate Assessment Portal &bull; Academic Year 2026</p>
+        </div>
+      </div>
+      <div class="user-nav">
+        <span class="badge">Candidate: <strong class="display-student-name">Rahul Rawat</strong></span>
+        <span class="badge">Roll: <strong class="display-student-roll">CS2024089</strong></span>
+        <button onclick="handleLogout()" class="btn btn-danger btn-sm">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="portal-navbar">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="#activeExams">Available Tests</a></li>
+        <li><a href="#history">Previous Scorecards</a></li>
+        <li><a href="results.html">Latest Result</a></li>
+        <li><a href="admin.html">&#9881; Admin Control Panel</a></li>
+      </ul>
+      <span style="font-size: 0.85rem; color: #d0e1fd; padding: 10px 0;">Session: ACTIVE</span>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+
+    <!-- Optional Admin Shortcut Banner if Admin role detected -->
+    <div id="adminNoticeBar" style="display: none; background: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; font-size: 0.88rem; justify-content: space-between; align-items: center;">
+      <span><strong>ADMIN SESSION DETECTED:</strong> You have admin privileges to add, edit or delete exam questions.</span>
+      <a href="admin.html" class="btn btn-danger btn-sm" style="margin-left: 10px;">Open Admin Panel &rarr;</a>
+    </div>
+
+    <!-- Welcome & Candidate Info Banner -->
+    <section class="student-banner">
+      <div class="student-meta">
+        <h2>Welcome, <span class="display-student-name">Rahul Rawat</span></h2>
+        <p>Roll No: <span class="display-student-roll">CS2024089</span> | Program: <span class="display-student-course">B.Tech Computer Science & Engg</span> | Sem: 6th</p>
+      </div>
+      <div>
+        <span style="background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 4px; font-size: 0.85rem;">
+          Portal IP: 192.168.1.104 (Authenticated)
+        </span>
+      </div>
+    </section>
+
+    <!-- Notice Ticker -->
+    <div class="notice-bar">
+      <strong>INSTRUCTIONS:</strong>
+      <span>Please read all exam guidelines before starting. Do not open secondary tabs or minimize the browser window during the assessment.</span>
+    </div>
+
+    <!-- Active Examinations Card -->
+    <section class="portal-card" id="activeExams">
+      <div class="portal-card-header">
+        <span>Available Examinations Scheduled For Today</span>
+        <span style="font-size: 0.8rem; font-weight: normal; color: #4b5563;">Status: Active &amp; Ready</span>
+      </div>
+      <div class="portal-card-body">
+        <div style="overflow-x: auto;">
+          <table class="table-custom">
+            <thead>
+              <tr>
+                <th>Paper Code</th>
+                <th>Course Name</th>
+                <th>Total Questions</th>
+                <th>Duration</th>
+                <th>Marks</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>CS401</strong></td>
+                <td><strong id="liveExamName">Web Technologies &amp; Systems</strong></td>
+                <td><span id="liveExamQCount">10</span> Questions</td>
+                <td><span id="liveExamDuration">15</span> Minutes</td>
+                <td><span id="liveExamMarks">10</span></td>
+                <td><span class="status-badge badge-active">AVAILABLE NOW</span></td>
+                <td>
+                  <button id="btnStartExamTrigger" onclick="launchExamModal()" class="btn btn-success btn-sm">
+                    Start Examination &rarr;
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>CS302</strong></td>
+                <td>Database Management Systems</td>
+                <td>25 Questions</td>
+                <td>30 Minutes</td>
+                <td>25</td>
+                <td><span class="status-badge badge-scheduled">STARTS AT 02:30 PM</span></td>
+                <td>
+                  <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.6; cursor: not-allowed;">
+                    Locked
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>CS201</strong></td>
+                <td>Data Structures & Algorithms</td>
+                <td>30 Questions</td>
+                <td>45 Minutes</td>
+                <td>30</td>
+                <td><span class="status-badge badge-scheduled">TOMORROW</span></td>
+                <td>
+                  <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.6; cursor: not-allowed;">
+                    Locked
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Readiness Check & Past Records Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+      
+      <!-- System Compatibility Card -->
+      <section class="portal-card">
+        <div class="portal-card-header">
+          <span>Candidate System Readiness Check</span>
+        </div>
+        <div class="portal-card-body" style="font-size: 0.88rem;">
+          <ul style="list-style: none; line-height: 2;">
+            <li>&#9989; <strong>Browser Compatibility:</strong> Supported (HTML5 Compliant)</li>
+            <li>&#9989; <strong>JavaScript Engine:</strong> Enabled & Ready</li>
+            <li>&#9989; <strong>Screen Resolution:</strong> Optimal (Responsive View)</li>
+            <li>&#9989; <strong>Network Latency:</strong> Good (&lt; 45ms)</li>
+            <li>&#9888;&#65039; <strong>Webcam Status:</strong> Simulated Proctoring Mode Active</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Past Exam History Card -->
+      <section class="portal-card" id="history">
+        <div class="portal-card-header">
+          <span>Previous Exam Attempts & Records</span>
+        </div>
+        <div class="portal-card-body">
+          <table class="table-custom" style="margin-top: 0;">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Exam</th>
+                <th>Score</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CS301</td>
+                <td>Operating Systems</td>
+                <td>18/20</td>
+                <td><span class="status-badge badge-passed">PASS</span></td>
+              </tr>
+              <tr>
+                <td>MA202</td>
+                <td>Discrete Mathematics</td>
+                <td>16/20</td>
+                <td><span class="status-badge badge-passed">PASS</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Start Exam Confirmation Modal -->
+  <div class="modal-overlay" id="startExamModal">
+    <div class="modal-dialog">
+      <h3>Ready to Begin Examination?</h3>
+      <div id="modalExamDetails" style="font-size: 0.9rem; margin-top: 10px; line-height: 1.6; color: #333;">
+        <!-- Details injected dynamically -->
+      </div>
+      <div style="margin-top: 15px; background: #fff3cd; border: 1px solid #ffeeba; padding: 10px; font-size: 0.83rem; color: #856404; border-radius: 3px;">
+        <strong>Notice:</strong> Once you click 'Proceed to Test', the countdown starts immediately. Make sure you are seated in a quiet room.
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeStartModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="proceedToExam()">Proceed to Test &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="portal-footer">
+    <p>&copy; 2026 Examination Automation Cell. All Rights Reserved.</p>
+    <p style="font-size: 0.75rem; margin-top: 4px; color: #8fa0b3;">Designed for Academic Evaluation &bull; Logged in as: CS2024089</p>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Check if admin is currently active
+      const role = sessionStorage.getItem("exam_current_role");
+      if (role === "admin") {
+        const bar = document.getElementById("adminNoticeBar");
+        if (bar) bar.style.display = "flex";
+      }
+
+      // Synchronize live paper details configured by admin
+      const title = localStorage.getItem("exam_settings_title") || "CS401: Web Technologies & Systems";
+      const duration = localStorage.getItem("exam_settings_duration") || "15";
+
+      let qCount = 10;
+      const storedQuestions = localStorage.getItem("exam_question_bank");
+      if (storedQuestions) {
+        try {
+          const parsed = JSON.parse(storedQuestions);
+          if (Array.isArray(parsed)) qCount = parsed.length;
+        } catch(e) {}
+      }
+
+      document.getElementById("liveExamName").textContent = title;
+      document.getElementById("liveExamQCount").textContent = qCount;
+      document.getElementById("liveExamDuration").textContent = duration;
+      document.getElementById("liveExamMarks").textContent = qCount;
+    });
+
+    function launchExamModal() {
+      const title = localStorage.getItem("exam_settings_title") || "CS401: Web Technologies & Systems";
+      const duration = localStorage.getItem("exam_settings_duration") || "15";
+      
+      let qCount = 10;
+      const storedQuestions = localStorage.getItem("exam_question_bank");
+      if (storedQuestions) {
+        try {
+          const parsed = JSON.parse(storedQuestions);
+          if (Array.isArray(parsed)) qCount = parsed.length;
+        } catch(e) {}
+      }
+
+      const modal = document.getElementById("startExamModal");
+      const details = document.getElementById("modalExamDetails");
+      details.innerHTML = `
+        <p><strong>Paper:</strong> ${title}</p>
+        <p><strong>Total Questions:</strong> ${qCount} Questions (Configured by Faculty/Admin)</p>
+        <p><strong>Duration:</strong> ${duration} Minutes</p>
+        <p><strong>Marking:</strong> +1 for correct, 0 for wrong (No negative marking)</p>
+      `;
+      modal.classList.add("active");
+    }
+
+    function closeStartModal() {
+      document.getElementById("startExamModal").classList.remove("active");
+    }
+
+    function proceedToExam() {
+      window.location.href = "exam.html";
+    }
+  </script>
+</body>
+</html>
